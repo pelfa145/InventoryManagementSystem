@@ -9,7 +9,7 @@ public class InventoryRepo(Inventory inventory)
         try
         {
             connection.Open();
-            string sql = """
+            string sql = """ 
                         SELECT * FROM inventory;
                         """;
             using (MySqlCommand command = new MySqlCommand(sql, connection))

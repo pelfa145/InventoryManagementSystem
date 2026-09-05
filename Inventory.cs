@@ -2,7 +2,7 @@ public class Inventory
 {
     private Dictionary<int, Product> Products = new();
     public Dictionary<int, Product> getProducts => Products;
-    
+
 
     public void addProduct()
     {
@@ -24,7 +24,7 @@ public class Inventory
     public void insertProducts(string prodName, string category, int stocks, double price, int id)
     {
         Products.Add(id, new Product(prodName, category, stocks, price, id));
-        Console.WriteLine("Ind1");
+        // Console.WriteLine("Ind1");
     }
     private int generateID()
     {
@@ -107,19 +107,24 @@ public class Inventory
                 int id;
                 while (!int.TryParse(Console.ReadLine(), out id))
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid whole number:");
+                    Console.WriteLine("Invalid input. Please enter a valid whole number: ");
                 }
-                
+
                 if (id == -1)
                 {
                     return;
                 }
                 Console.Write("Enter amount of stocks to add: ");
-                int stocks = int.Parse(Console.ReadLine()!);
+                // int stocks = int.Parse(Console.ReadLine()!);
+                int stocks = 0;
+                while (!int.TryParse(Console.ReadLine(), out stocks)){
+                    Console.WriteLine("Invalid Input Please enter a valid whole number: ");
+                }
                 Products[id].buy(stocks);
                 done = true;
+
             }
-            
+
             catch (KeyNotFoundException) { done = false; }
         } while (!done);
     }
@@ -134,16 +139,21 @@ public class Inventory
                 int id;
                 while (!int.TryParse(Console.ReadLine(), out id))
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid whole number:");
+                    Console.WriteLine("Invalid input. Please enter a valid whole number: ");
                 }
-                
+
                 if (id == -1)
                 {
                     return;
                 }
                 Console.Write("Enter amount of stocks to sell: ");
-                int stocks = int.Parse(Console.ReadLine()!);
-                if(stocks > Products[id].stock)
+                // int stocks = int.Parse(Console.ReadLine()!);
+                int stocks = 0;
+                while(!int.TryParse(Console.ReadLine(), out stocks))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid whole number: ");
+                }
+                if (stocks > Products[id].stock)
                 {
                     Console.WriteLine("Exceeded current stocks.");
                     Console.WriteLine("Selling all.");
@@ -151,10 +161,10 @@ public class Inventory
                     return;
                 }
                 Products[id].sell(stocks);
-                
+
                 done = true;
             }
-            
+
             catch (KeyNotFoundException) { done = false; }
         } while (!done);
     }
