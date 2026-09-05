@@ -14,6 +14,11 @@
         {
             Console.WriteLine("=== INVENTORY SYSTEM ===\n\n1. Add Product\n2. Remove Product\n3. Search Products\n4. View All Products\n5. Restock Products\n6. Sell Product\n7. Exit");
             Console.Write("Enter your choice: ");
+            int choice = default;
+            while(!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Enter your choice properly: ");
+            }
             switch (int.Parse(Console.ReadLine()!))
             {
                 case 1: 
